@@ -1,0 +1,25 @@
+
+_:node16h0lnum0x1 a <http://www.openrdf.org/config/repository#RepositoryContext> .
+
+_:node16h0lnum0x2 a <http://www.openrdf.org/config/repository#Repository> ;
+	<http://www.openrdf.org/config/repository#repositoryID> "SYSTEM" ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "System configuration repository" .
+
+_:node16h0lnum0x3 <http://www.openrdf.org/config/repository#repositoryType> "openrdf:SystemRepository" .
+
+_:node16h0lnum0x2 <http://www.openrdf.org/config/repository#repositoryImpl> _:node16h0lnum0x3 .
+
+_:node16hijvtt0x4 a <http://www.openrdf.org/config/repository#RepositoryContext> .
+
+_:node16hijvtt0x5 a <http://www.openrdf.org/config/repository#Repository> ;
+	<http://www.openrdf.org/config/repository#repositoryID> "wanalytics" ;
+	<http://www.w3.org/2000/01/rdf-schema#label> "Web Analytics Dataset " .
+
+_:node16hijvtt0x6 <http://www.openrdf.org/config/repository#repositoryType> "openrdf:SailRepository" .
+
+_:node16hijvtt0x7 <http://www.openrdf.org/config/sail#sailType> "openrdf:NativeStore" ;
+	<http://www.openrdf.org/config/sail/native#tripleIndexes> "spoc,posc" .
+
+_:node16hijvtt0x6 <http://www.openrdf.org/config/repository/sail#sailImpl> _:node16hijvtt0x7 .
+
+_:node16hijvtt0x5 <http://www.openrdf.org/config/repository#repositoryImpl> _:node16hijvtt0x6 .
