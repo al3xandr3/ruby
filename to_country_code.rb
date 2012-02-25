@@ -1,3 +1,4 @@
+
 COUNTRY_CODES = {
   'Afghanistan'=>'AF',
   'Albania'=>'AL',
