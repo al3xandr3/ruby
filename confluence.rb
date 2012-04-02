@@ -3,7 +3,7 @@ module Confluence
   require 'xmlrpc/client'
   extend self
 
-  # Confluence.post "<h1>Hello Confluence</h1>", "page", "space", "user", "pass", "confluence.my.com"
+  # Confluence.post "{html}<h1>Hello Confluence</h1>{html}", "page", "space", "user", "pass", "confluence.my.com"
   def post content, page, space, user, pass, server
     confluence = XMLRPC::Client.new2("https://#{user}:#{pass}@#{server}/rpc/xmlrpc")
     # disable certificate check    
@@ -12,7 +12,7 @@ module Confluence
     confluence = confluence.proxy("confluence1")
 
     pa = confluence.getPage("", space, page)
-    pa["content"] = "{html}#{content}{html}"
+    pa["content"] = content
     confluence.storePage("", pa)
   end
 
@@ -47,7 +47,7 @@ if __FILE__ == $0
 
   if ARGV[0] == "post"
     if ARGV.size != 7
-      puts '$ ruby confluence.rb post "<h1>Hello Confluence</h1>" "page" "space" "username" "password" "confluence.my.com"'
+      puts '$ ruby confluence.rb post "{html}<h1>Hello Confluence</h1>{html}" "page" "space" "username" "password" "confluence.my.com"'
     else
       Confluence.post ARGV[1], ARGV[2], ARGV[3], ARGV[4], ARGV[5], ARGV[6]
     end
