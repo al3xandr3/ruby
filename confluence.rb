@@ -9,7 +9,7 @@ module Confluence
     # disable certificate check    
     confluence.instance_variable_get(:@http).instance_variable_set(:@verify_mode, OpenSSL::SSL::VERIFY_NONE)
     # shortcut
-    confluence = confluence.proxy("confluence1")
+    confluence = confluence.proxy("confluence2")
 
     pa = confluence.getPage("", space, page)
     pa["content"] = content
@@ -22,13 +22,13 @@ module Confluence
     # disable certificate check    
     server.instance_variable_get(:@http).instance_variable_set(:@verify_mode, OpenSSL::SSL::VERIFY_NONE)
     # shortcut
-    confluence = server.proxy("confluence1")
+    confluence = server.proxy("confluence2")
 
     token = confluence.login(user, pass)
     pa = confluence.getPage(token, space, page)
 
     attachment = {}
-    attachment['fileName'] = file
+    attachment['fileName'] =  File.basename file
     attachment['contentType'] = type
 
     # Read updated local copy of the document

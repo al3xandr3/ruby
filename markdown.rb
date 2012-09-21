@@ -34,6 +34,18 @@ module Markdown
       margin: 1em -1em .25em;
       color: #007DC5;
     }
+    pre {
+      border: 1px solid #D8D8D8;
+      background-color: #F7F7F7;
+      font: 1em/1.5 'andale mono','lucida console', monospace;
+      overflow: auto;
+      padding: 1.5em 0em 1.5em !important;
+    }
+    blockquote {
+      border-left: 4px double #CCC;
+      font-style: italic;
+      padding-left: 1em;
+    }
     </style>
     </head>
     <body>
@@ -43,23 +55,31 @@ module Markdown
     </html>
   }.gsub(/^\s+/, '')
 
-  def html input, output=nil
-    markdown = RDiscount.new(File.read(input))
-    content = markdown.to_html
-    
-    # template    
-    page = ERB.new(@template1, 0, "%<>").result(binding)
 
-    if output.nil?
-      input_dir = File.dirname input
-      html_file = File.basename(input).gsub(/\.md$/, '.html')
-      output = "#{input_dir}/#{html_file}"
+
+  def html input, template=nil
+
+    # read input
+    markdown = RDiscount.new(File.read(input))
+    content  = markdown.to_html
+    if template nil?
+      template = @template1
+    else 
+      template = File.read(input)
     end
-    
+
+    # fill template    
+    page = ERB.new(template, 0, "%<>").result(binding)
+
+    # write out
+    input_dir = File.dirname input
+    html_file = File.basename(input).gsub(/\.md$/, '.html')
+    output = "#{input_dir}/#{html_file}"
     File.open(output, "w") do |f|
       f.write(page)
     end
 
+    return page
   end
 end
 
@@ -68,4 +88,5 @@ if __FILE__ == $0
   if ARGV[0] == "html"
     Markdown.html ARGV[1], ARGV[2]
   end
+  
 end
