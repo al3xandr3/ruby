@@ -1,4 +1,3 @@
-
   
 # ==========
 # IMAP FLAGS
@@ -44,7 +43,6 @@ module Mail
   extend self
   
   def content opts={}
-
     opts[:port]    ||= 993
     opts[:ssl]     ||= true
     
@@ -66,7 +64,6 @@ module Mail
   end
   
   def download opts={}
-    
     opts[:port]    ||= 993
     opts[:ssl]     ||= true
 
@@ -103,8 +100,7 @@ module Mail
     end
   end
   
-  def archive opts={:inbox => "Inbox", :search => ["SINCE", "8-Aug-2007"]}  
-    
+  def archive opts={:inbox => "Inbox", :search => ["SINCE", "8-Aug-2007"]}
     opts[:port]    ||= 993
     opts[:ssl]     ||= true
 
@@ -127,4 +123,3 @@ end
 if __FILE__ == $0
   #testing code 
 end
-  
